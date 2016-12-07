@@ -16,7 +16,7 @@ import (
 
 	"github.com/miekg/dns"
 
-	"github.com/aacebedo/dnsdock/src/utils"
+	"github.com/btison/dnsdock/src/utils"
 )
 
 func TestDNSResponse(t *testing.T) {

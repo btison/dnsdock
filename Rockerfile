@@ -41,12 +41,12 @@ ENV CGO_ENABLED 0
 RUN go get -v github.com/tools/godep
 RUN go get -u github.com/golang/lint/golint
 
-RUN mkdir -p /go/src/github.com/aacebedo/dnsdock
-WORKDIR /go/src/github.com/aacebedo/dnsdock
+RUN mkdir -p /go/src/github.com/btison/dnsdock
+WORKDIR /go/src/github.com/btison/dnsdock
 {{if .SRC_DIR}}
-  MOUNT {{$SRC_DIR}}:/go/src/github.com/aacebedo/dnsdock
+  MOUNT {{$SRC_DIR}}:/go/src/github.com/btison/dnsdock
 {{else}}
-  RUN git clone https://github.com/aacebedo/dnsdock /go/src/github.com/aacebedo/dnsdock 
+  RUN git clone https://github.com/btison/dnsdock /go/src/github.com/btison/dnsdock 
   RUN git checkout {{$GIT_COMMIT}}
 {{end}}
 
@@ -56,10 +56,10 @@ WORKDIR /go/src/github.com/aacebedo/dnsdock
   RUN mkdir /tmp/output
 {{end}}
 
-WORKDIR /go/src/github.com/aacebedo/dnsdock
+WORKDIR /go/src/github.com/btison/dnsdock
 RUN godep restore
 ENV GOARCH={{$ARCH}}
-WORKDIR /go/src/github.com/aacebedo/dnsdock/src
+WORKDIR /go/src/github.com/btison/dnsdock/src
 ATTACH sh
 RUN go build -o /tmp/output/dnsdock -ldflags "-X main.version=$(if version=$(git describe --contains HEAD 2>/dev/null); then echo $version; else echo "dev"; fi)"
 RUN golint -set_exit_status
@@ -77,8 +77,8 @@ FROM easypi/alpine-arm
 {{end}}
 IMPORT ./dnsdock /bin/dnsdock
 ENTRYPOINT ["dnsdock"]
-TAG aacebedo/dnsdock:{{$DOCKERIMAGE_VERSION}}-{{$ARCH}}
+TAG btison/dnsdock:{{$DOCKERIMAGE_VERSION}}-{{$ARCH}}
 
 {{if ne $DOCKERIMAGE_VERSION "dev"}}
-TAG aacebedo/dnsdock:latest-{{$ARCH}}
+TAG btison/dnsdock:latest-{{$ARCH}}
 {{end}}

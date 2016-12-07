@@ -16,9 +16,9 @@ import (
 
 	"github.com/op/go-logging"
 
-	"github.com/aacebedo/dnsdock/src/core"
-	"github.com/aacebedo/dnsdock/src/servers"
-	"github.com/aacebedo/dnsdock/src/utils"
+	"github.com/btison/dnsdock/src/core"
+	"github.com/btison/dnsdock/src/servers"
+	"github.com/btison/dnsdock/src/utils"
 )
 
 var logger = logging.MustGetLogger("dnsdock.main")

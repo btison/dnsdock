@@ -18,7 +18,7 @@ import (
 
 	"github.com/miekg/dns"
 
-	"github.com/aacebedo/dnsdock/src/utils"
+	"github.com/btison/dnsdock/src/utils"
 )
 
 // Service represents a container and an attached DNS record

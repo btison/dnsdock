@@ -14,7 +14,7 @@ import (
 
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/aacebedo/dnsdock/src/utils"
+	"github.com/btison/dnsdock/src/utils"
 )
 
 const (

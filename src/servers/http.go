@@ -14,7 +14,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/aacebedo/dnsdock/src/utils"
+	"github.com/btison/dnsdock/src/utils"
 )
 
 // HTTPServer represents the http endpoint

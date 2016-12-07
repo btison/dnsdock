@@ -22,8 +22,8 @@ import (
 	"github.com/vdemeester/docker-events"
 	"golang.org/x/net/context"
 
-	"github.com/aacebedo/dnsdock/src/servers"
-	"github.com/aacebedo/dnsdock/src/utils"
+	"github.com/btison/dnsdock/src/servers"
+	"github.com/btison/dnsdock/src/utils"
 )
 
 // DockerManager is the entrypoint to the docker daemon
