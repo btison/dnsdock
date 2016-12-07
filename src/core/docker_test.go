@@ -22,6 +22,11 @@ func TestGetImageName(t *testing.T) {
 		"tonistiigi/foo":                       "foo",
 		"tonistiigi/foo-bar:v1.0":              "foo-bar",
 		"domain.com/tonistiigi/bar.baz:latest": "bar.baz",
+		"foo_foo":                                  "foo-foo",
+		"foo_foo:latest":                           "foo-foo",
+		"tonistiigi/foo_foo":                       "foo-foo",
+		"tonistiigi/foo_foo-bar:v1.0":              "foo-foo-bar",
+		"domain.com/tonistiigi/foo_bar.baz:latest": "foo-bar.baz",
 	}
 
 	for input, expected := range inputs {
@@ -51,15 +56,17 @@ func TestImageNameIsSHA(t *testing.T) {
 	}
 }
 
-func TestCleanContainerName(t *testing.T) {
+func TestCleanName(t *testing.T) {
 	inputs := map[string]string{
-		"foo":  "foo",
-		"/foo": "foo",
+		"foo":      "foo",
+		"/foo":     "foo",
+		"foo_foo":  "foo-foo",
+		"/foo_foo": "foo-foo",
 	}
 
 	for input, expected := range inputs {
 		t.Log(input)
-		if actual := cleanContainerName(input); actual != expected {
+		if actual := cleanName(input); actual != expected {
 			t.Error(input, "Expected:", expected, "Got:", actual)
 		}
 	}

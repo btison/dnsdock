@@ -125,7 +125,7 @@ func (d *DockerManager) getService(id string) (*servers.Service, error) {
 		logger.Warningf("Warning: Can't route %s, image %s is not a tag.", id[:10], service.Image)
 		service.Image = ""
 	}
-	service.Name = cleanContainerName(desc.Name)
+	service.Name = cleanName(desc.Name)
 
 	switch len(desc.NetworkSettings.Networks) {
 	case 0:
@@ -158,7 +158,7 @@ func getImageName(tag string) string {
 	if index := strings.LastIndex(tag, ":"); index != -1 {
 		tag = tag[:index]
 	}
-	return tag
+	return cleanName(tag)
 }
 
 func imageNameIsSHA(image, sha string) bool {
@@ -174,8 +174,10 @@ func imageNameIsSHA(image, sha string) bool {
 	return strings.HasPrefix(sha, image)
 }
 
-func cleanContainerName(name string) string {
-	return strings.Replace(name, "/", "", -1)
+func cleanName(name string) string {
+	res := strings.Replace(name, "/", "", -1)
+	res = strings.Replace(res, "_", "-", -1)
+	return res
 }
 
 func splitEnv(in []string) (out map[string]string) {
